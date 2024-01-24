@@ -22,8 +22,15 @@ class Spaceship(pygame.sprite.Sprite):
 
     def update(self):
         self.get_user_input()
-        
+        self.constrain_movement()#2 aggiunta in loop del blocco della naveta sullo schermo
 
+    def constrain_movement(self):#1 blocco della navetta all interno dello schermo
+        if self.rect.right > self.screen_width:
+            self.rect.right = self.screen_width
+        if self.rect.left < 0:
+            self.rect.left = 0
+
+        
 
 
 
