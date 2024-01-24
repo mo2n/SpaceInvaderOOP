@@ -1,5 +1,6 @@
 import pygame, sys
 from spaceship import Spaceship
+from laser import Laser
 
 
 pygame.init()
@@ -17,6 +18,12 @@ spaceship = Spaceship(SCREEN_WIDTH, SCREEN_HEIGHT)
 spaceship_group = pygame.sprite.GroupSingle()
 spaceship_group.add(spaceship)
 
+laser = Laser((100, 100))
+laser2 = Laser((100, 200))
+
+lasers_group = pygame.sprite.Group()
+lasers_group.add(laser, laser2)
+
 #Loop piu fps
 while True:
     fps = clock.get_fps()#
@@ -32,6 +39,8 @@ while True:
     #Drawing
     screen.fill(GREY)
     spaceship_group.draw(screen)
+    lasers_group.draw(screen)
+
 
     pygame.display.update()
     clock.tick(FPS)
