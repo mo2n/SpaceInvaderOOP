@@ -11,6 +11,9 @@ class Spaceship(pygame.sprite.Sprite):
         self.rect = self.image.get_rect(midbottom = (self.screen_width/2, self.screen_height))
         self.speed = 6
         self.lasers_group = pygame.sprite.Group()
+        self.laser_ready = True# inizio laser ogni tot secondi
+        self.laser_time = 0
+        self.laser_delay = 300
 
 
     def get_user_input(self):
@@ -22,21 +25,34 @@ class Spaceship(pygame.sprite.Sprite):
         if keys[pygame.K_LEFT]:
             self.rect.x -= self.speed
 
-        if keys[pygame.K_SPACE]:
+        if keys[pygame.K_SPACE]and self.laser_ready:
+            self.laser_ready = False
             laser = Laser(self.rect.center, 5, self.screen_height)
             self.lasers_group.add(laser)
+            self.laser_time = pygame.time.get_ticks()
+
 
 
     def update(self):
         self.get_user_input()
         self.constrain_movement()#2 aggiunta in loop del blocco della naveta sullo schermo
         self.lasers_group.update()
+        self.recharge_laser()
 
     def constrain_movement(self):#1 blocco della navetta all interno dello schermo
         if self.rect.right > self.screen_width:
             self.rect.right = self.screen_width
         if self.rect.left < 0:
             self.rect.left = 0
+
+    def recharge_laser(self):#routine per laser beam ogni tot secondi
+        if not self.laser_ready:
+            current_time = pygame.time.get_ticks()
+            if current_time - self.laser_time >= self.laser_delay:
+                self.laser_ready = True
+
+
+
 
         
 

@@ -27,7 +27,7 @@ while True:
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
-
+ 
     #Update
     spaceship_group.update()#movimento spaceship
     

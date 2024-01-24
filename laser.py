@@ -12,7 +12,7 @@ class Laser(pygame.sprite.Sprite):
     def update(self):#movimento laser
         self.rect.y -= self.speed#routine mov laser
         if self.rect.y > self.screen_height + 15 or self.rect.y < 0:#routine laser beam out screen
-            print("kill laser")
+            #print("kill laser")
             self.kill()
 
 
